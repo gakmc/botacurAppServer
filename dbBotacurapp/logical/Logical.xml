@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="5C59E657-A7D8-8F56-44E7-B5E4170CBDA4" mainViewID="AA09BEE4-1BC5-0E64-74DF-C72AE2DC1F1C">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:25:28 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

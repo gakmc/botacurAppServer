@@ -1,0 +1,19 @@
+Pasos para crear MVC 
+1. Comenzaremos por la creación del modelo, a través del comando en la carpeta raiz php artisan make:model Nombre -m ( esto crea la migracion) -c (Crea el controlador) -r(tipo de controlador RESOURCE CONTROLLER)
+2. Se ingresan los atributos de cada tabla a través de las migraciones creadas
+3. Se declaran los atributos en los modelos respectivos con las mismas variables indicadas en las migraciones
+4. Se ingresan los tipos de relaciones con otras tablas 
+5. Se declaran las rutas de grupo (web.php) y se define como Route::resourse('NOMBREENTIDAD','CONTROLLERENTIDAD). De esta forma se puede acceder al CRUD 
+6. Se declaran las policias, se crean a través de la consola con el siguiente comando php artisan make:policy nombreEntidadPolicy -model NOMBREMODELO 
+7. Dar de alta la policia, Providers\AuthServiceProvider. 
+8. Retornar true en la función create de la policia. 
+9. Se crea el directorio themes\pages\Nuevo directorio y dentro de el se crea el archivo para la vista. Ej: create.blade.php 
+10. Se copia la estructura de la plantilla (demo.blade.php) 
+11. Se ingresa el formulio o estructura en el section 'content' y sus respectiva nombre de columnas en cada label 
+12. En el controlador, la parte create apuntamos a la hoja creada (       return view('themes.backoffice.pages.programa.create');
+)
+13. Para ver lo que esta enviado, en store retornamos el $request ( dd($request); )
+14. Se creara los request por el modelo que se esta trabajando. ( php artisan make:request "Modelo"/StoreRequest) En Storerequest se van a ingresar las validaciones por cada entrada y sus respectivos mensajes de error 
+15. Usar la ruta App\Modelo ( Programa) y  App\Http\Request\Modelo en el controlador. 
+16. En la función de autorización se tiene que retornar un true para que pase la información. En rules, las validaciones de cada campo y una nueva función con los mensajes según campo, si es requerido, unico, tipo de variable, max, etc. 
+17. 

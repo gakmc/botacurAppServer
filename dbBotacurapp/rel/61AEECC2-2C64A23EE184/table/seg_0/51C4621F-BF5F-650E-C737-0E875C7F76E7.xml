@@ -1,0 +1,111 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="51C4621F-BF5F-650E-C737-0E875C7F76E7" name="users">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:26:35 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="E56FCA16-D53A-4E4E-405E-0367ADDADE07">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:27:25 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="8C28E6CF-1545-772F-7DF2-E1D0A0672D02">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:28:09 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="email" id="A89702B3-C2A6-1F99-74CC-0F8E39B44C70">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:28:31 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="email_verified_at" id="4870ACC6-B65D-01A1-7148-6F3E96995413">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:29:18 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="password" id="23E8EE23-75AB-3782-DBAB-3CDAD3C1F536">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:30:27 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="remember_token" id="499B5EEF-BB46-C0AF-68F1-8298AF8DE92B">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:31:52 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="created_at" id="98A64F19-8BE9-502A-171D-468B114F24A6">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:32:15 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="updated_at" id="F38A91A4-807D-AF20-6216-B0941290ACC3">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:32:58 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2A3ACC44-DDA7-190D-D1E5-401BFEECEA6F" name="users_PK">
+<createdBy>swimm</createdBy>
+<createdTime>2022-11-06 14:27:25 UTC</createdTime>
+<ownerDesignName>dbBotacurapp</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E56FCA16-D53A-4E4E-405E-0367ADDADE07"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
