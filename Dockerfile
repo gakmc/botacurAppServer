@@ -18,7 +18,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Establecer el directorio de trabajo en el contenedor
 WORKDIR /var/www
 
-# Copiar todos los archivos del proyecto al contenedor
+# Copiar todos los archivos del proyecto al contenedorrr
 COPY . .
 
 # Crear un archivo .env temporal para Composer
