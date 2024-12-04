@@ -1,0 +1,10 @@
+2024-12-04 18:43:01,628 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-12-04 18:43:01,636 INFO supervisord started with pid 1
+2024-12-04 18:43:02,638 INFO spawned: 'nginx' with pid 9
+2024-12-04 18:43:02,640 INFO spawned: 'php-fpm' with pid 10
+2024-12-04 18:43:03,674 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-12-04 18:43:03,674 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-12-04 18:44:48,932 WARN received SIGQUIT indicating exit request
+2024-12-04 18:44:48,932 INFO waiting for nginx, php-fpm to die
+2024-12-04 18:44:48,937 INFO stopped: php-fpm (exit status 0)
+2024-12-04 18:44:48,943 INFO stopped: nginx (exit status 0)
