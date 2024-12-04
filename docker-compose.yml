@@ -13,26 +13,11 @@ services:
       - laravel
     environment:
       - DB_CONNECTION=mysql
-      - DB_HOST=190.107.177.54
+      - DB_HOST=190.107.177.54  # Dirección IP de tu base de datos externa
       - DB_PORT=3306
       - DB_DATABASE=cbo56863_botacurapp
       - DB_USERNAME=cbo56863
       - DB_PASSWORD=gZbQTjPFVYDzRzTdNmmA
-
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_DATABASE: cbo56863_botacurapp
-      MYSQL_USER: cbo56863
-      MYSQL_PASSWORD: gZbQTjPFVYDzRzTdNmmA
-      MYSQL_ROOT_PASSWORD: root_secret
-    volumes:
-      - dbdata:/var/lib/mysql
-    networks:
-      - laravel
 
   nginx:
     image: nginx:alpine
@@ -51,6 +36,3 @@ services:
 
 networks:
   laravel:
-
-volumes:
-  dbdata:

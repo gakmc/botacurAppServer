@@ -1,25 +1,16 @@
 # Usa una imagen base oficial de PHP con FPM
-FROM php:7.3.20-fpm
+FROM php:7.3-fpm
 
-# Instalar dependencias del sistema, Nginx y otros paquetes
+# Instalar dependencias necesarias y extensiones PHP
 RUN apt-get update && apt-get install -y \
-    nginx \
     libpng-dev \
     zip \
     unzip \
     git \
     curl \
-    supervisor
-
-# Instalar Node.js (versión LTS, actualmente v18)
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs
-
-# Verificar la instalación de Node.js y npm
-RUN node -v && npm -v
-
-# Configurar Nginx
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+    libonig-dev \
+    libzip-dev \
+    && docker-php-ext-install pdo_mysql mbstring zip
 
 # Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -30,6 +21,9 @@ WORKDIR /var/www
 # Copiar todos los archivos del proyecto al contenedor
 COPY . .
 
+# Crear un archivo .env temporal para Composer
+RUN cp .env.example .env
+
 # Otorgar permisos a las carpetas necesarias para Laravel
 RUN chown -R www-data:www-data storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
@@ -37,17 +31,11 @@ RUN chmod -R 775 storage bootstrap/cache
 # Instalar dependencias de Composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Instalar dependencias de npm
-RUN npm install
+# Eliminar el archivo .env temporal
+RUN rm .env
 
-# Compilar los assets con Laravel Mix (modo producción)
-RUN npm run production
-
-# Copiar el archivo de configuración de supervisord
-COPY supervisord.conf /etc/supervisord.conf
-
-# Exponer el puerto 80 para Nginx
+# Exponer el puerto 9000 para PHP-FPM
 EXPOSE 9000
 
-# Ejecutar Supervisor para manejar Nginx y PHP-FPM
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+# Ejecutar PHP-FPM
+CMD ["php-fpm"]
