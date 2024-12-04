@@ -1,44 +1,40 @@
-# Usa una imagen base oficial de PHP con FPM (para Laravel)
+# Usa una imagen base oficial de PHP con FPM
 FROM php:7.3.20-fpm
 
-# Instalar las dependencias necesarias del sistema operativo
+# Instalar dependencias del sistema y extensiones PHP necesarias para Laravel
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
     zip \
     unzip \
     git \
-    curl
+    curl \
+    nginx
 
-# Instalar extensiones de PHP necesarias para Laravel
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# Configurar Nginx
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
-# Instalar Composer (copiarlo desde la imagen oficial de Composer)
+# Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Establecer el directorio de trabajo en el contenedor
+# Establecer el directorio de trabajo
 WORKDIR /var/www
 
-# Copiar todos los archivos de tu proyecto al contenedor
+# Copiar los archivos del proyecto al contenedor
 COPY . .
 
-# Copiar el archivo de ejemplo .env como .env
-COPY .env.example .env
-
-# Dar permisos a las carpetas storage y bootstrap/cache (necesarias para Laravel)
+# Otorgar permisos a las carpetas necesarias para Laravel
 RUN chown -R www-data:www-data storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
 
-# Instalar las dependencias de Composer (sin scripts para evitar errores)
+# Instalar dependencias de Composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Generar la clave de la aplicación Laravel
 RUN php artisan key:generate
 
-# Exponer el puerto para la aplicación (PHP-FPM usa 9000)
-EXPOSE 9000
+# Exponer el puerto 80 para Nginx
+EXPOSE 80
 
-# Iniciar el servidor PHP-FPM
-CMD ["php-fpm"]
+# Ejecutar Nginx y PHP-FPM en primer plano
+CMD service nginx start && php-fpm
