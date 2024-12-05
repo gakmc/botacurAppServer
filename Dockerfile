@@ -32,15 +32,14 @@ RUN chown -R www-data:www-data /var/www/html \
 # Instala dependencias de Composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Compila los assets de frontend
-RUN npm install && npm run prod
-
 # Habilita mod_rewrite para Laravel
 RUN a2enmod rewrite
 
+# Compila los assets de frontend
+RUN npm install && npm run prod
+
 # Ejecuta comandos de Artisan necesarios
-RUN php artisan storage:link \
-    && php artisan config:cache
+RUN php artisan storage:link
 
 # Exponer puerto 80
 EXPOSE 80
