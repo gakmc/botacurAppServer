@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     git \
     && docker-php-ext-install zip pdo pdo_mysql
 
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+
 # Instala Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
