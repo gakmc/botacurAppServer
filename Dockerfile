@@ -36,7 +36,9 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 RUN a2enmod rewrite
 
 # Compila los assets de frontend
-RUN npm install && npm run prod
+RUN npm install
+RUN npm run dev
+RUN npm run prod
 
 # Ejecuta comandos de Artisan necesarios
 RUN php artisan storage:link
