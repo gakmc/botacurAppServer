@@ -8,8 +8,11 @@ RUN apt-get update && apt-get install -y \
     unzip \
     curl \
     git \
+    nodejs \
+    npm \
     && docker-php-ext-install zip pdo pdo_mysql
 
+# Configura Apache para Laravel
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
 # Instala Composer
@@ -26,9 +29,16 @@ RUN chown -R www-data:www-data /var/www/html \
 # Instala dependencias de Composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
+# Compila los assets de frontend
+RUN npm install && npm run prod
+
 # Habilita mod_rewrite para Laravel
 RUN a2enmod rewrite
 
+# Ejecuta comandos de Artisan necesarios
+RUN php artisan storage:link \
+    && php artisan config:cache \
+    && php artisan route:cache
 
 # Exponer puerto 80
 EXPOSE 80
