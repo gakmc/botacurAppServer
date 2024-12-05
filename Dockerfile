@@ -37,8 +37,7 @@ RUN a2enmod rewrite
 
 # Ejecuta comandos de Artisan necesarios
 RUN php artisan storage:link \
-    && php artisan config:cache \
-    && php artisan route:cache
+    && php artisan config:cache
 
 # Exponer puerto 80
 EXPOSE 80
