@@ -27,8 +27,6 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 # Habilita mod_rewrite para Laravel
 RUN a2enmod rewrite
 
-# Configura el archivo .htaccess
-COPY .htaccess /var/www/html/
 
 # Exponer puerto 80
 EXPOSE 80
