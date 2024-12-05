@@ -1,35 +1,36 @@
-# Usa una imagen base oficial de PHP con FPM
+# Usa una imagen base de PHP 7.3 con Apache
 FROM php:7.3-apache
 
-# Instalar dependencias necesarias y extensiones PHP
+# Instala extensiones requeridas por Laravel
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
+    libzip-dev \
     zip \
     unzip \
-    git \
     curl \
-    libonig-dev \
-    libzip-dev \
-    && docker-php-ext-install pdo_mysql mbstring zip
+    git \
+    && docker-php-ext-install zip pdo pdo_mysql
 
-# Instalar Composer
+# Instala Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copia los archivos de la app
+# Copia los archivos de la aplicación
 COPY . /var/www/html
 
-# Habilita mod_rewrite
+# Establece permisos
+RUN chown -R www-data:www-data /var/www/html
+
+# Habilita mod_rewrite para Laravel
 RUN a2enmod rewrite
-
-# Copiar todos los archivos del proyecto al contenedor
-COPY . .
-
-# Crear un archivo .env temporal para Composer
-RUN cp .env.example .env
 
 # Establece el directorio de trabajo
 WORKDIR /var/www/html
-RUN php artisan key:generate
+
+# Instala dependencias de Composer
+RUN composer install --no-dev --optimize-autoloader
+
+
+# Establece los permisos para las carpetas de almacenamiento y caché
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Otorgar permisos a las carpetas necesarias para Laravel
 RUN chown -R www-data:www-data /var/www/html
@@ -40,7 +41,10 @@ RUN chmod -R 775 storage bootstrap/cache
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Eliminar el archivo .env temporal
-RUN rm .env
+# RUN rm .env
 
-# Exponer el puerto 9000 para PHP-FPM
+# Exponer puerto 80
 EXPOSE 80
+
+# Comando de inicio
+CMD ["apache2-foreground"]
