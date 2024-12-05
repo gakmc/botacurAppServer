@@ -14,34 +14,21 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Copia los archivos de la aplicación
-COPY . /var/www/html
+WORKDIR /var/www/html
+COPY . .
 
-# Establece permisos
-RUN chown -R www-data:www-data /var/www/html
+# Establece permisos correctos (una vez)
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 storage bootstrap/cache
+
+# Instala dependencias de Composer
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Habilita mod_rewrite para Laravel
 RUN a2enmod rewrite
 
-# Establece el directorio de trabajo
-WORKDIR /var/www/html
-
-# Instala dependencias de Composer
-RUN composer install --no-dev --optimize-autoloader
-
-
-# Establece los permisos para las carpetas de almacenamiento y caché
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Otorgar permisos a las carpetas necesarias para Laravel
-RUN chown -R www-data:www-data /var/www/html
-RUN chown -R www-data:www-data storage bootstrap/cache
-RUN chmod -R 775 storage bootstrap/cache
-
-# Instalar dependencias de Composer
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
-
-# Eliminar el archivo .env temporal
-# RUN rm .env
+# Configura el archivo .htaccess
+COPY .htaccess /var/www/html/
 
 # Exponer puerto 80
 EXPOSE 80
