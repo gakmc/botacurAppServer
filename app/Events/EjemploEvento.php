@@ -33,6 +33,19 @@ class EjemploEvento implements ShouldBroadcast
     public function broadcastOn()
     {
         return ['canal-publico'];
+        // return new Channel('canal-publico');
         // return new PrivateChannel('channel-name');
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'mensaje' => $this->mensaje,
+        ];
+    }
+    
+      public function broadcastAs()
+    {
+        return 'Emitir';
     }
 }
