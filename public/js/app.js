@@ -18,11 +18,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Pusher.logToConsole = true;
+// window.Pusher.logToConsole = true;
+
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "4cc47a6244243927d9da",
-  cluster: "sa1",
+  key: "2cd262d10b08871a3eab",
+  cluster: "mt1",
   forceTLS: true
 });
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
