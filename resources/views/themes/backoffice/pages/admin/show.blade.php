@@ -155,7 +155,7 @@
         setTimeout(function () {
             if (window.Echo) {
                 window.Echo.channel('canal-publico')
-                    .listen('EjemploEvento', (e) => {
+                    .listen('.Emitir', (e) => {
                         console.log(e.mensaje);
     
                         const Toast = Swal.mixin({
